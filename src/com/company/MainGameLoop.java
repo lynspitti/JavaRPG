@@ -135,9 +135,7 @@ public class MainGameLoop {
                                     if(((Monster) checkPos).isBoss){
                                         Console.Msg("YUSSAH, you have defeated the boss, time to move to the next floor", true, false);
                                         GameLevel ++;
-                                        List<Player> players = new ArrayList<Player>();
-                                        players.add((Player)charector);
-                                                GameMap.LoadNextMap(players);
+                                        GameMap.LoadNextMap();
                                     }else {
                                         Console.Msg("Hurray, you have defeated a " + checkPos.getClass().getSimpleName(), true, false);
                                     }
@@ -159,7 +157,7 @@ public class MainGameLoop {
                             else {
                                 Console.Msg("Sorry, but you have been defeated.", true, true);
                                 charector.Die((Character)checkPos);
-                                //A chance to farm xp
+                                //A chance to farm xp, leave this comment
                                 //((Monster) checkPos).Heal(100);
                                 break;
                             }

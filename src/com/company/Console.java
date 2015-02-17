@@ -4,6 +4,7 @@ import com.company.MonsterTypes.Mage;
 import com.company.MonsterTypes.SkeletonArcher;
 import com.company.MonsterTypes.Slime;
 import com.company.MonsterTypes.Zombie;
+import jdk.nashorn.internal.runtime.Debug;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

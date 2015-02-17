@@ -13,12 +13,13 @@ public class Map {
     public Object[][] VisibleMap;
     private String _defaultMapPath = "src/com/company/maps/";
     private double _enemySpawnChance = 0.2;
+    private int Players = 3;
 
     /**
      * Constructor
      */
     public Map() {
-        LoadWorld(_defaultMapPath,3);
+        LoadWorld(_defaultMapPath,Players);
     }
 
     /**
@@ -36,18 +37,23 @@ public class Map {
 
     /**
      * loads the next map while saving the player object
-     * @param player the player to save
      */
-    public void LoadNextMap(List<Player> player){
-        LoadWorld(_defaultMapPath, player);
+    public void LoadNextMap(){
+        List<Player> players = new ArrayList<Player>();
+        for (Character cha : Characters){
+            if (cha instanceof Player){
+                players.add((Player)cha);
+            }
+        }
+        LoadWorld(_defaultMapPath, players);
     }
 
     /**
      * loads a random map from the folder specified with the specific player object
      * @param Path the folder to load maps from
-     * @param player the player object to add to the map
+     * @param players the player object to add to the map
      */
-    private void LoadWorld(String Path, List<Player> player) {
+    private void LoadWorld(String Path, List<Player> players) {
         File MapsFolder = new File(Path);
         File[] ListOfFiles = MapsFolder.listFiles(new FileFilter() {
             @Override
@@ -71,11 +77,11 @@ public class Map {
         }
 
         Object[][] map = new Object[lines.get(0).length()][lines.size()];
-        int playersToPlace = player.size();
+        int playersToPlace = players.size();
         boolean bossPlaced = false;
         List<Point> playersPlacedHere = new ArrayList<Point>();
         while (playersToPlace > 0 || !bossPlaced) {//if player & boss wasn't placed after first attempt to generate map, retry!
-            playersToPlace = player.size();
+            playersToPlace = players.size();
             bossPlaced = false;
             Characters.clear();
             playersPlacedHere.clear();
@@ -86,8 +92,8 @@ public class Map {
                     if (c == '0') {
                         object = 0;
                         if (playersToPlace > 0 && random.nextDouble() < 0.02) {//only place a player if it hasn't been placed already
-                            Characters.add(player.get(playersToPlace-1));
-                            object = player.get(playersToPlace-1);
+                            Characters.add(players.get(playersToPlace-1));
+                            object = players.get(playersToPlace-1);
 
                             playersPlacedHere.add(new Point(i,j));
 
