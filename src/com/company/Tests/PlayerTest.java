@@ -52,7 +52,7 @@ public class PlayerTest {
     public void testDie() throws Exception {
         player.CurrentHealth = 1;
         player.Die(null);
-        assertTrue(player.CurrentHealth == player.Maxhealth);
+        assertTrue(player.CurrentHealth == player.Maxhealth());
     }
 
     /**

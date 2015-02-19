@@ -74,10 +74,6 @@ public class Player extends Character implements IUser{
     @Override
     public void LvlUp() {
         Level += 1;
-        //Health
-        /*(L * 100 + D) * ?>0(1. 1I)
-        */
-        Maxhealth = (int)Math.round(((Level * 100) + DefensePower) * (1+ (0.1 * Intelligence)));
         Heal(100);
         int response = (Integer)Console.Interact(Dialog.Level);
         switch (response){

@@ -13,13 +13,17 @@ public class Map {
     public Object[][] VisibleMap;
     private String _defaultMapPath = "src/com/company/maps/";
     private double _enemySpawnChance = 0.2;
-    private int Players = 3;
+    private int Players = 1;
 
     /**
      * Constructor
      */
     public Map() {
         LoadWorld(_defaultMapPath,Players);
+    }
+    public Map(List<Player> players) {
+
+        LoadWorld(_defaultMapPath, players);
     }
 
     /**

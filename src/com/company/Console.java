@@ -154,6 +154,7 @@ public final class Console {
                         return MoveDir.Right;
                     }
                     else if (Response.equals("level")) return MoveDir.cheat;
+                    else if (Response.equals("save")) return MoveDir.save;
                 }
             case Attack:
                 while(true){
@@ -173,10 +174,26 @@ public final class Console {
             case Wellcome:
                 Message += "Hello and welcome to the Java Rpg,\n";
                 Message += "also known as, The Tower Of Doom.\n";
-                Message += "Created by Jesper Baunsgaard and Daniel Jensen";
+                Message += "Created by Jesper Baunsgaard and Daniel Jensen\n\n";
+                Console.Msg(Message,false,false);
+                while(true){
+                    Message = "Do you want to load a save game??";
+                    Console.Msg(Message,false,false);
 
-                Console.Msg(Message,true,true);
-                break;
+                    String Response = Console.readLine().toLowerCase();
+
+                    if (Response.equals("y")) return true;
+                    else if (Response.equals("n")) return false;
+                }
+            case Load:
+                while(true) {
+                    Message += "Please Enter a Player name to load.\n";
+                    Message += "Finish with Q.\n";
+                    Console.Msg(Message,false,true);
+                    String Response = Console.readLine().toLowerCase();
+                    if (Response.equals("q")) return "Quit";
+                    else return Response;
+                }
             default:
                 break;
         }
@@ -248,7 +265,7 @@ public final class Console {
  * Move directions
  */
 enum MoveDir{
-    Up,Down,Left,Right,cheat;
+    Up,Down,Left,Right,cheat,save;
     public static MoveDir get(int i){
         return values()[i];
     }
@@ -259,5 +276,5 @@ enum MoveDir{
  * used in Interact
  */
 enum Dialog {
-    Wellcome,Move,Attack,Level;
+    Wellcome,Move,Attack,Level,Load;
 }

@@ -2,6 +2,14 @@ package com.company;
 
 
 public abstract class Monster  extends Character{
+    @Override
+    public int Maxhealth(){
+        int health = super.Maxhealth();
+        if(isBoss){
+            health *= 1.5;
+        }
+        return health;
+    }
     public boolean isBoss = false;
     /**
      * this happens when the monster dies
@@ -35,7 +43,6 @@ public abstract class Monster  extends Character{
         //Health
         /*(L * 100 + D) * ?>0(1. 1I)
         */
-
         int response = Console.RandomInt(1,4);
         switch (response){
             case 1:
@@ -50,10 +57,6 @@ public abstract class Monster  extends Character{
             case 4:
                 Agility++;
                 break;
-        }
-        Maxhealth = (int)Math.round(((Level * 100) + DefensePower) * (1+ (0.1 * Intelligence)));
-        if(isBoss){
-            Maxhealth *= 1.5;
         }
         Heal(100);
     }

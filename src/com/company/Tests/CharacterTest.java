@@ -111,10 +111,10 @@ public class CharacterTest {
 
         Monster.Heal(100);
         assertNotEquals(MonsterHp, Monster.CurrentHealth);
-        assertTrue(Monster.CurrentHealth == Monster.Maxhealth);
+        assertTrue(Monster.CurrentHealth == Monster.Maxhealth());
         Player.Heal(100);
         assertNotEquals(PlayerHp, Player.CurrentHealth);
-        assertTrue(Player.CurrentHealth == Player.Maxhealth);
+        assertTrue(Player.CurrentHealth == Player.Maxhealth());
     }
 
     /**

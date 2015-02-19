@@ -1,6 +1,7 @@
 package com.company;
 
 import java.awt.*;
+import java.sql.Connection;
 import java.util.*;
 import java.util.List;
 
@@ -17,11 +18,25 @@ public class MainGameLoop {
      * @param args Non use.
      */
     public static void main(String[] args) {
-        GameMap = new Map();
-        Console.Interact(Dialog.Wellcome);
+        DBHelper helper = new DBHelper();
+        //Connection con = helper.GetConnection();
 
+        boolean Load = (Boolean)Console.Interact(Dialog.Wellcome);
+        if (!Load) GameMap = new Map();
+        else {
+            SaveFunctions GetLoad = new SaveFunctions();
+            GameMap = new Map(GetLoad.LoadPlayers());
+        }
         //The game loop
         while (true){
+            boolean HavePlayer = false;
+            for (Character cha: GameMap.Characters){
+                if (cha instanceof Player) {
+                    HavePlayer = true;
+                    break;
+                }
+            }
+            if (!HavePlayer) break;
             TurnLoop();
         }
     }
@@ -109,6 +124,12 @@ public class MainGameLoop {
                                 while (charector.Level != cheatLvl){
                                     charector.LvlUp();
                                 }
+                                break;
+                            case save:
+                                SaveFunctions Save = new SaveFunctions();
+                                Console.Msg("Please write a player name to save.",false,true);
+                                Save.SavePalyer(Console.readLine(),(Player)charector);
+                                GameMap.Characters.remove(charector);
                                 break;
                         }
                         if (newPos == null) break;
