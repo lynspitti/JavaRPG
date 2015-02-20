@@ -66,7 +66,7 @@ public abstract class Monster  extends Character{
  * an enum of all the monsters possible to spawn
  */
 enum Monsters {
-    Mage,SkeletonArcher,Slime,Zombie;
+    XmlMonster,Zombie;
 
     /**
      * gets the name of the monster at the specified index
